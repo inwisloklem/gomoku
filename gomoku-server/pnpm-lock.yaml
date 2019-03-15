@@ -7,6 +7,7 @@ dependencies:
   jest-resolve: 24.5.0
   nodemon: 1.18.10
   socket.io: 2.2.0
+  uuid: 3.3.2
 lockfileVersion: 5
 packages:
   /@babel/code-frame/7.0.0:
@@ -4699,3 +4700,4 @@ specifiers:
   jest-resolve: ^24.5.0
   nodemon: ^1.18.10
   socket.io: ^2.2.0
+  uuid: ^3.3.2
