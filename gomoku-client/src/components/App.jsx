@@ -48,7 +48,7 @@ function App () {
             value={messageText}
           />
           <button type='submit' className={styles.appButton}>
-            Send message
+            Message
           </button>
         </form>
       </main>
