@@ -10,14 +10,10 @@ export const reducer = (state, action) => {
 
   switch (type) {
     case 'addMessage':
-      const result = {
+      return {
         ...state,
-        messagesList: [
-          ...messagesList,
-          message
-        ]
+        messagesList: [...messagesList, message]
       }
-      return result
     default:
       return state
   }
