@@ -17,7 +17,6 @@ export const reducer = (state, action) => {
           message
         ]
       }
-      console.info(JSON.stringify(result))
       return result
     default:
       return state
