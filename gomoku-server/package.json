@@ -23,7 +23,8 @@
     ]
   },
   "scripts": {
-    "start": "set DEBUG=* && nodemon ./index",
+    "start": "nodemon ./index",
+    "debug": "set DEBUG=* && nodemon ./index",
     "test": "jest --watchAll"
   }
 }
