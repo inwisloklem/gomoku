@@ -1,9 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import StoreContext from './StoreContext'
 import style from './Login.module.sass'
 
 const MIN_USERNAME_LENGTH = 4
 
 function Login () {
+  const { socket } = useContext(StoreContext)
   const [userName, setUserName] = useState('')
   const inputRef = useRef()
 
@@ -15,6 +17,7 @@ function Login () {
   const handleUserNameSubmit = e => {
     e.preventDefault()
     if (userName.length >= MIN_USERNAME_LENGTH) {
+      socket.emit('client:userName', userName)
       setUserName('')
     }
     inputRef.current.focus()
@@ -29,7 +32,7 @@ function Login () {
         to get an unbroken row of five signs horizontally, vertically, or diagonally.
       </div>
       <form className={style.form} onSubmit={e => handleUserNameSubmit(e)}>
-        <input className={style.input} type='text' onChange={e => setUserName(e)} placeholder='Name' ref={inputRef} value={userName} />
+        <input className={style.input} type='text' onChange={e => setUserName(e.target.value)} placeholder='Name' ref={inputRef} value={userName} />
         <button className={style.button} type='submit'>
           To lobby
         </button>

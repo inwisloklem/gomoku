@@ -18,6 +18,14 @@ function App () {
     socket.on('connect', () => {
       setIsConnected(true)
     })
+    socket.on('server:currentUser', currentUser => {
+      console.info(currentUser)
+      dispatch({ type: 'updateCurrentUser', currentUser })
+    })
+    socket.on('server:usersList', usersList => {
+      console.info(usersList)
+      dispatch({ type: 'updateUsersList', usersList })
+    })
   }, [])
 
   return isConnected ? (
