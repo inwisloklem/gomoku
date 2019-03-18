@@ -14,17 +14,12 @@ const server = app.listen(PORT, () => {
 
 const io = socketIo(server)
 io.on('connection', socket => {
-  console.info('User connected.')
-  socket.emit('server.message', { id: uuidv4(), messageText: 'Welcome to Gomoku game chat.' })
+  socket.emit('server:message', { id: uuidv4(), messageText: 'Welcome to Gomoku chat' })
 
-  socket.on('client.message', messageText => {
-    io.emit('server.message', {
+  socket.on('client:message', messageText => {
+    io.emit('server:message', {
       id: uuidv4(),
       messageText
     })
-  })
-
-  socket.on('disconnect', () => {
-    console.info('User disconnected.')
   })
 })
