@@ -14,8 +14,6 @@ const server = app.listen(PORT, () => {
 
 const io = socketIo(server)
 io.on('connection', socket => {
-  socket.emit('server:message', { id: uuidv4(), messageText: 'Welcome to Gomoku chat' })
-
   socket.on('client:message', messageText => {
     io.emit('server:message', {
       id: uuidv4(),
