@@ -14,6 +14,7 @@ dependencies:
   eslint-plugin-standard: 4.0.0
   identity-obj-proxy: 3.0.0
   node-sass: 4.11.0
+  prop-types: 15.7.2
   react: 16.8.4
   react-dom: 16.8.4
   react-router-dom: 4.4.0
@@ -11681,6 +11682,7 @@ specifiers:
   eslint-plugin-standard: ^4.0.0
   identity-obj-proxy: ^3.0.0
   node-sass: ^4.11.0
+  prop-types: ^15.7.2
   react: ^16.7.0
   react-dom: ^16.7.0
   react-router-dom: ^4.4.0
