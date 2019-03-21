@@ -19,15 +19,15 @@ function App () {
       setIsConnected(true)
     })
     socket.on('server:currentUser', currentUser => {
-      console.info(currentUser)
       dispatch({ type: 'updateCurrentUser', currentUser })
+      dispatch({ type: 'login' })
     })
     socket.on('server:usersList', usersList => {
-      console.info(usersList)
       dispatch({ type: 'updateUsersList', usersList })
     })
   }, [])
 
+  // TODO: https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Redirect.md
   return isConnected ? (
     <StoreContext.Provider value={{ socket, state, dispatch }}>
       <Router>
