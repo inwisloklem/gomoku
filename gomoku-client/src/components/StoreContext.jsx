@@ -2,6 +2,7 @@ import { createContext } from 'react'
 
 export const initialState = {
   currentUser: '',
+  isLoggedIn: false,
   messagesList: [],
   usersList: []
 }
@@ -15,6 +16,16 @@ export const reducer = (state, action) => {
       return {
         ...state,
         messagesList: [...messagesList, message]
+      }
+    case 'login':
+      return {
+        ...state,
+        isLoggedIn: true
+      }
+    case 'logout':
+      return {
+        ...state,
+        isLoggedIn: false
       }
     case 'updateCurrentUser':
       return {
