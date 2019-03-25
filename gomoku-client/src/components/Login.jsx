@@ -10,7 +10,7 @@ function Login () {
   const inputRef = useRef()
 
   useEffect(() => {
-    document.head.querySelector('title').innerText = 'Gomoku: Log In'
+    document.title = 'Gomoku: Log In'
     inputRef.current.focus()
   }, [])
 
