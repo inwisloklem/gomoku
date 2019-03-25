@@ -1,7 +1,7 @@
 import { createContext } from 'react'
 
 export const initialState = {
-  currentUser: '',
+  currentUser: null,
   isLoggedIn: false,
   messagesList: [],
   usersList: []
