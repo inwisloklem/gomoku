@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import StoreContext, { initialState, reducer } from './StoreContext'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom'
 import Lobby from './Lobby'
 import Login from './Login'
 import socketIoClient from 'socket.io-client'
@@ -12,6 +12,7 @@ let socket
 function App () {
   const [isConnected, setIsConnected] = useState(false)
   const [state, dispatch] = useReducer(reducer, initialState)
+  const { isLoggedIn } = state
 
   useEffect(() => {
     socket = socketIoClient(ENDPOINT)
@@ -27,12 +28,11 @@ function App () {
     })
   }, [])
 
-  // TODO: https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Redirect.md
   return isConnected ? (
     <StoreContext.Provider value={{ socket, state, dispatch }}>
       <Router>
-        <Route exact path='/' component={Login} />
-        <Route path='/lobby' component={Lobby} />
+        <Route exact path='/' render={() => (isLoggedIn ? <Redirect to='/lobby' /> : <Login />)} />
+        <Route path='/lobby' render={() => (isLoggedIn ? <Lobby /> : <Redirect to='/' />)} />
       </Router>
     </StoreContext.Provider>
   ) : (
