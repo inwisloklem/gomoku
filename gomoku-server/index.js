@@ -21,11 +21,11 @@ io.on('connection', socket => {
   socket.on('client:userName', userName => {
     if (!users.some(user => user.id === id)) {
       users.push({
-        userName,
-        id
+        id,
+        userName
       })
     }
-    socket.emit('server:currentUser', id)
+    socket.emit('server:currentUser', { id, userName })
     io.emit('server:usersList', users)
   })
 
