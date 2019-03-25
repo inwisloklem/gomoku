@@ -1,16 +1,21 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import StoreContext from './StoreContext'
 import MessagesList from './MessagesList'
+import UsersList from './UsersList'
 import styles from './Lobby.module.sass'
 
 function Lobby () {
   const [messageText, setMessageText] = useState('')
   const { socket, state, dispatch } = useContext(StoreContext)
-  const { messagesList } = state
+  const {
+    currentUser: { userName },
+    messagesList,
+    usersList
+  } = state
   const inputRef = useRef()
 
   useEffect(() => {
-    document.head.querySelector('title').innerText = 'Gomoku: Lobby'
+    document.title = 'Gomoku: Lobby'
     socket.on('server:message', message => {
       const { id, messageText } = message
       dispatch({ type: 'addMessage', message: { id, messageText } })
@@ -30,7 +35,14 @@ function Lobby () {
   return (
     <main className={styles.lobby}>
       <h1 className={styles.title}>Lobby</h1>
-      <MessagesList messages={messagesList} />
+      <div className={styles.inner}>
+        <div className={styles.left}>
+          <MessagesList messages={messagesList} userName={userName} />
+        </div>
+        <div className={styles.right}>
+          <UsersList users={usersList} />
+        </div>
+      </div>
       <form className={styles.form} onSubmit={e => handleMessageSubmit(e)}>
         <input
           type='text'
