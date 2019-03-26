@@ -7,18 +7,13 @@ import styles from './Lobby.module.sass'
 function Lobby () {
   const [messageText, setMessageText] = useState('')
   const { socket, state, dispatch } = useContext(StoreContext)
-  const {
-    currentUser: { userName },
-    messagesList,
-    usersList
-  } = state
+  const { currentUser, messagesList, usersList } = state
   const inputRef = useRef()
 
   useEffect(() => {
     document.title = 'Gomoku: Lobby'
     socket.on('server:message', message => {
-      const { id, messageText } = message
-      dispatch({ type: 'addMessage', message: { id, messageText } })
+      dispatch({ type: 'addMessage', message })
     })
     inputRef.current.focus()
   }, [])
@@ -26,7 +21,7 @@ function Lobby () {
   const handleMessageSubmit = e => {
     e.preventDefault()
     if (messageText !== '') {
-      socket.emit('client:message', messageText)
+      socket.emit('client:message', { author: currentUser, text: messageText })
       setMessageText('')
     }
     inputRef.current.focus()
@@ -37,7 +32,7 @@ function Lobby () {
       <h1 className={styles.title}>Lobby</h1>
       <div className={styles.inner}>
         <div className={styles.left}>
-          <MessagesList messages={messagesList} userName={userName} />
+          <MessagesList messages={messagesList} />
         </div>
         <div className={styles.right}>
           <UsersList users={usersList} />

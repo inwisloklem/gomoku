@@ -3,15 +3,13 @@ import PropTypes from 'prop-types'
 import styles from './MessagesList.module.sass'
 
 function MessagesList (props) {
-  const { messages, userName } = props
+  const { messages } = props
   return (
     <ul className={styles.list}>
-      <li className={styles.listItem}>
-        Welcome to Gomoku chat, <strong>{userName}</strong>
-      </li>
       {messages.map(message => (
         <li className={styles.listItem} key={message.id}>
-          {message.messageText}
+          <span className={styles.userName}>{`<${message.author.userName}> `}</span>
+          {message.text}
         </li>
       ))}
     </ul>
@@ -19,8 +17,7 @@ function MessagesList (props) {
 }
 
 MessagesList.propTypes = {
-  messages: PropTypes.array,
-  userName: PropTypes.string
+  messages: PropTypes.array
 }
 
 export default MessagesList
