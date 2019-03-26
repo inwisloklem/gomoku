@@ -2,13 +2,14 @@
 
 .lobby
   position: relative
+  display: flex
+  flex-direction: column
   padding: 20px
-  padding-bottom: 140px
   height: 100vh
 
 .inner
   display: flex
-  height: 100%
+  flex-grow: 1
 
 .left
   flex-grow: 1
@@ -22,7 +23,7 @@
 
 .button
   position: absolute
-  top: 2px
+  top: 22px
   right: 2px
   width: 120px
   padding: 0 10px
@@ -48,10 +49,8 @@
     outline-offset: 0
 
 .form
-  position: absolute
-  left: 20px
-  right: 20px
-  bottom: 20px
+  position: relative
+  padding-top: 20px
   font-size: 24px
 
 .title
