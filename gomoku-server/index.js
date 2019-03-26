@@ -29,10 +29,11 @@ io.on('connection', socket => {
     io.emit('server:usersList', users)
   })
 
-  socket.on('client:message', messageText => {
+  socket.on('client:message', message => {
     io.emit('server:message', {
+      ...message,
       id: uuidv4(),
-      messageText
+      timeStamp: Date.now()
     })
   })
 
