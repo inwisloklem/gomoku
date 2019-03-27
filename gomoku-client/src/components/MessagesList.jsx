@@ -2,8 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './MessagesList.module.sass'
 
-function MessagesList (props) {
-  const { messages } = props
+function MessagesList ({ messages }) {
   return (
     <ul className={styles.list}>
       {messages.map(message => (

@@ -2,8 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './UsersList.module.sass'
 
-function UsersList (props) {
-  const { users } = props
+function UsersList ({ users }) {
   return (
     <ul className={styles.list}>
       {users.map(user => (
