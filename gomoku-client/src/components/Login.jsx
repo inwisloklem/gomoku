@@ -34,7 +34,7 @@ function Login () {
       <form className={style.form} onSubmit={e => handleUserNameSubmit(e)}>
         <input className={style.input} type='text' onChange={e => setUserName(e.target.value)} placeholder='Name' ref={inputRef} value={userName} />
         <button className={style.button} type='submit'>
-          To lobby
+          Okay
         </button>
       </form>
     </main>
