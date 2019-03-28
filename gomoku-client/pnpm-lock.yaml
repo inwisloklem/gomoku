@@ -1,4 +1,5 @@
 dependencies:
+  classnames: 2.2.6
   cross-env: 5.2.0
   enzyme: 3.9.0
   enzyme-adapter-react-16: 1.11.2
@@ -2877,6 +2878,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-qOhPa/Fj7s6TY8H8esGu5QNpMMQxz79h+urzrNYN6mn+9BnxlDGf5QZ+XeCDsxSjPqsSR56XOZOJmpeurnLMeg==
+  /classnames/2.2.6:
+    dev: false
+    resolution:
+      integrity: sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
   /clean-css/4.2.1:
     dependencies:
       source-map: 0.6.1
@@ -11671,6 +11676,7 @@ packages:
     resolution:
       integrity: sha1-AI4G2AlDIMNy28L47XagymyKxBk=
 specifiers:
+  classnames: ^2.2.6
   cross-env: ^5.2.0
   enzyme: ^3.8.0
   enzyme-adapter-react-16: ^1.8.0
