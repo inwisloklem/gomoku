@@ -22,6 +22,7 @@ io.on('connection', socket => {
     if (!users.some(user => user.id === id)) {
       users.push({
         id,
+        isBusy: false,
         userName
       })
     }
