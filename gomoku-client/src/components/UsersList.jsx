@@ -3,18 +3,22 @@ import PropTypes from 'prop-types'
 import styles from './UsersList.module.sass'
 import classNames from 'classnames'
 
+const { compare } = new Intl.Collator()
+
 function UsersList ({ currentUser, onDialogInit, users }) {
+  const sortedUsers = users.sort((a, b) => compare(a.userName, b.userName))
   return (
     <ul className={styles.list}>
-      {users.map(user => {
+      {sortedUsers.map(user => {
         const stylesListItem = classNames({
           [styles.listItem]: true,
           [styles.listItemCurrent]: currentUser.id === user.id
         })
         return (
           <li className={stylesListItem} key={user.id} onClick={() => onDialogInit(user)}>
-            {user.userName}
-          </li>)
+            {user.userName} {currentUser.id === user.id ? '*' : ''}
+          </li>
+        )
       })}
     </ul>
   )
