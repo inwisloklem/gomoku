@@ -1,0 +1,43 @@
+@import "../variables"
+
+.dialog
+  position: fixed
+  top: 50%
+  left: 50%
+  margin: 0
+  padding: 40px
+  border: solid 2px $c-default
+  box-shadow: 20px 20px 0 0 rgba($c-default, 0.075)
+  transform: translate(-50%, -50%)
+
+.button,
+.buttonGhost
+  margin-right: 10px
+  padding: 0 10px
+  width: 120px
+  height: 40px
+  font-weight: 700
+  font-size: 16px
+  cursor: pointer
+  outline: none
+
+.button
+  border: none
+  background-color: $c-default
+  color: $c-inverse
+
+.buttonGhost
+  border: solid 2px $c-default
+  background-color: transparent
+  color: $c-default
+
+.inner
+  display: flex
+
+.title
+  margin: 0
+  margin-bottom: 20px
+  color: $c-default
+
+.userName
+  background-color: $c-accent
