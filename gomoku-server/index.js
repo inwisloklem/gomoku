@@ -37,6 +37,11 @@ io.on('connection', socket => {
     })
   })
 
+  socket.on('client:request', users => {
+    const { currentUser, user } = users
+    io.to(user.id).emit('server:request', currentUser)
+  })
+
   socket.on('disconnect', () => {
     const index = users.findIndex(user => user.id === id)
     users.splice(index, 1)
