@@ -14,7 +14,7 @@
   font-size: 16px
 
   &:nth-of-type(2n + 1)
-    background-color: rgba($c-default, 0.05)
+    background-color: $c-lightest-background
 
   &:not(.listItemCurrent)
     transition: $t-default
@@ -22,3 +22,6 @@
 
     &:hover
       color: $c-accent
+
+.listItemCurrent
+  cursor: not-allowed
