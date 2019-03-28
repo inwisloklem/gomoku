@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
+import Dialog from './Dialog'
 import StoreContext from './StoreContext'
 import MessagesList from './MessagesList'
 import UsersList from './UsersList'
 import styles from './Lobby.module.sass'
 
 function Lobby () {
+  const [dialogOptions, setDialogOptions] = useState(null)
   const [messageText, setMessageText] = useState('')
   const { socket, state, dispatch } = useContext(StoreContext)
   const { currentUser, messagesList, usersList } = state
@@ -15,8 +17,37 @@ function Lobby () {
     socket.on('server:message', message => {
       dispatch({ type: 'addMessage', message })
     })
+    socket.on('server:request', user => {
+      const { userName } = user
+      setDialogOptions({
+        onAccept () {
+          console.info('handleDialogAccept')
+        },
+        onReject () {
+          console.info('handleDialogReject')
+        },
+        open: true,
+        userName,
+        view: 'choose'
+      })
+    })
     inputRef.current.focus()
   }, [])
+
+  const handleDialogInit = user => {
+    if (user.id === currentUser.id) {
+      return
+    }
+    setDialogOptions({
+      open: true,
+      userName: user.userName,
+      view: 'request'
+    })
+    socket.emit('client:request', {
+      currentUser,
+      user
+    })
+  }
 
   const handleMessageSubmit = e => {
     e.preventDefault()
@@ -35,7 +66,7 @@ function Lobby () {
           <MessagesList messages={messagesList} />
         </div>
         <div className={styles.right}>
-          <UsersList users={usersList} />
+          <UsersList currentUser={currentUser} users={usersList} onDialogInit={handleDialogInit} />
         </div>
       </div>
       <form className={styles.form} onSubmit={e => handleMessageSubmit(e)}>
@@ -52,6 +83,7 @@ function Lobby () {
           Send
         </button>
       </form>
+      <Dialog {...dialogOptions} />
     </main>
   )
 }
