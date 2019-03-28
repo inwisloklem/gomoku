@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './Dialog.module.sass'
 
-function Dialog ({ onAccept, onReject, open, view, userName }) {
-  const switchDialogContent = (userName, view) => {
+function Dialog ({ open, ...props }) {
+  const switchDialogContent = ({ onAccept, onReject, view, userName }) => {
     switch (view) {
       case 'choose':
         return (
@@ -41,7 +41,7 @@ function Dialog ({ onAccept, onReject, open, view, userName }) {
 
   return (
     <dialog className={styles.dialog} open={open}>
-      {switchDialogContent(userName, view)}
+      {switchDialogContent(props)}
     </dialog>
   )
 }
