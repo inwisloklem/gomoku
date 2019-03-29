@@ -10,13 +10,18 @@ function UsersList ({ currentUser, onDialogInit, users }) {
   return (
     <ul className={styles.list}>
       {sortedUsers.map(user => {
-        const stylesListItem = classNames({
-          [styles.listItem]: true,
-          [styles.listItemCurrent]: currentUser.id === user.id
-        })
         return (
-          <li className={stylesListItem} key={user.id} onClick={() => onDialogInit(user)}>
-            {user.userName} {currentUser.id === user.id ? '*' : ''}
+          <li className={styles.listItem} key={user.id} onClick={() => onDialogInit(user)}>
+            <span
+              className={classNames({
+                [styles.userName]: true,
+                [styles.userNameCurrent]: currentUser.id === user.id,
+                [styles.userNameBusy]: currentUser.id !== user.id && user.isBusy
+              })}
+            >
+              {user.userName}
+            </span>
+            {currentUser.id === user.id ? ' *' : ''}
           </li>
         )
       })}
