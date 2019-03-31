@@ -12,22 +12,41 @@ function Lobby () {
   const { currentUser, messagesList, usersList } = state
   const inputRef = useRef()
 
+  const handleDialogReject = user => {
+    socket.emit('client:abort', user)
+    socket.emit('client:setBusy:false', {
+      currentUser,
+      user
+    })
+    setDialogOptions({
+      open: false
+    })
+  }
+
   useEffect(() => {
     document.title = 'Gomoku: Lobby'
+    socket.on('server:abort', () => {
+      setDialogOptions({
+        open: false
+      })
+    })
     socket.on('server:message', message => {
       dispatch({ type: 'addMessage', message })
     })
     socket.on('server:request', user => {
-      const { userName } = user
+      socket.emit('client:setBusy:true', {
+        currentUser,
+        user
+      })
       setDialogOptions({
         onAccept () {
           console.info('handleDialogAccept')
         },
         onReject () {
-          console.info('handleDialogReject')
+          handleDialogReject(user)
         },
         open: true,
-        userName,
+        user,
         view: 'choose'
       })
     })
@@ -39,8 +58,11 @@ function Lobby () {
       return
     }
     setDialogOptions({
+      onReject () {
+        handleDialogReject(user)
+      },
       open: true,
-      userName: user.userName,
+      user,
       view: 'request'
     })
     socket.emit('client:request', {
