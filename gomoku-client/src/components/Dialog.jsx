@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import styles from './Dialog.module.sass'
 
 function Dialog ({ open, ...props }) {
-  const switchDialogContent = ({ onAccept, onReject, view, userName }) => {
+  const switchDialogContent = ({ onAccept, onReject, view, user }) => {
     switch (view) {
       case 'choose':
         return (
           <>
             <h2 className={styles.title}>
-              <span className={styles.userName}>{userName}</span> offers you a game
+              <span className={styles.userName}>{user.userName}</span> offers you a game
             </h2>
             <div className={styles.inner}>
               <button type='button' className={styles.button} onClick={onAccept}>
@@ -25,7 +25,7 @@ function Dialog ({ open, ...props }) {
         return (
           <>
             <h2 className={styles.title}>
-              Waiting for <span className={styles.userName}>{userName}</span>...
+              Waiting for <span className={styles.userName}>{user.userName}</span>...
             </h2>
             <div className={styles.inner}>
               <button type='button' className={styles.buttonGhost} onClick={onReject}>
@@ -51,7 +51,7 @@ Dialog.propTypes = {
   onReject: PropTypes.func,
   open: PropTypes.bool,
   view: PropTypes.string,
-  userName: PropTypes.string
+  user: PropTypes.object
 }
 
 export default Dialog
