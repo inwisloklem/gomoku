@@ -1,8 +1,9 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import StoreContext, { initialState, reducer } from './StoreContext'
-import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom'
-import Lobby from './Lobby'
-import Login from './Login'
+import { BrowserRouter as Router } from 'react-router-dom'
+import LoginRoute from './LoginRoute'
+import GameRoute from './GameRoute'
+import LobbyRoute from './LobbyRoute'
 import socketIoClient from 'socket.io-client'
 import styles from './App.module.sass'
 
@@ -12,7 +13,6 @@ let socket
 function App () {
   const [isConnected, setIsConnected] = useState(false)
   const [state, dispatch] = useReducer(reducer, initialState)
-  const { isLoggedIn } = state
 
   useEffect(() => {
     socket = socketIoClient(ENDPOINT)
@@ -31,8 +31,9 @@ function App () {
   return isConnected ? (
     <StoreContext.Provider value={{ socket, state, dispatch }}>
       <Router>
-        <Route exact path='/' render={() => (isLoggedIn ? <Redirect to='/lobby' /> : <Login />)} />
-        <Route path='/lobby' render={() => (isLoggedIn ? <Lobby /> : <Redirect to='/' />)} />
+        <LoginRoute />
+        <LobbyRoute />
+        <GameRoute />
       </Router>
     </StoreContext.Provider>
   ) : (
