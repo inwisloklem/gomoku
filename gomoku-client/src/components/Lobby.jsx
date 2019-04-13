@@ -40,7 +40,11 @@ function Lobby () {
       })
       setDialogOptions({
         onAccept () {
-          console.info('handleDialogAccept')
+          socket.emit('client:startGame', {
+            currentUser,
+            user
+          })
+          dispatch({ type: 'startGame' })
         },
         onReject () {
           handleDialogReject(user)
