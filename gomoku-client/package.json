@@ -9,6 +9,7 @@
     "not op_mini all"
   ],
   "dependencies": {
+    "babel-loader": "^8.0.5",
     "classnames": "^2.2.6",
     "cross-env": "^5.2.0",
     "enzyme": "^3.8.0",
