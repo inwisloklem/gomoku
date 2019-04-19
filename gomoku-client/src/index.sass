@@ -1,5 +1,15 @@
 @import "variables"
 
+html
+  box-sizing: border-box
+
+  *
+    box-sizing: inherit
+
+    &::before,
+    &::after
+      box-sizing: inherit
+
 body
   margin: 0
   padding: 0
@@ -7,15 +17,7 @@ body
   color: $c-default
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
-  box-sizing: border-box
-
-*
-  box-sizing: inherit
-
-  &::before,
-  &::after
-    box-sizing: inherit
 
 button,
 input
-  font-family: $f-sans
+  font-family: inherit
