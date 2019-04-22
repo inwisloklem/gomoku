@@ -13,12 +13,12 @@ const store = {
 }
 
 const setBusy = (users, isBusy) => {
-  Object.values(users).forEach(user => {
+  for (let user of Object.values(users)) {
     const index = store.users.findIndex(storeUser => user.id === storeUser.id)
     if (~index) {
       store.users[index].isBusy = isBusy
     }
-  })
+  }
 }
 
 const server = app.listen(PORT, () => {
