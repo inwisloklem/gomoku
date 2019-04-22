@@ -56,6 +56,12 @@ io.on('connection', socket => {
     io.emit('server:usersList', store.users)
   })
 
+  socket.on('client:startGame', users => {
+    for (let user of Object.values(users)) {
+      io.to(user.id).emit('server:startGame')
+    }
+  })
+
   socket.on('client:userName', userName => {
     if (!store.users.some(user => user.id === id)) {
       store.users.push({
