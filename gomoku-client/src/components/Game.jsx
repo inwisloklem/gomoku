@@ -12,10 +12,10 @@ function Game () {
   return (
     <main className={styles.game}>
       <div className={styles.field}>
-        {field.map(row => (
-          <div className={styles.row}>
-            {row.map(value => (
-              <button className={styles.button} type='button'>
+        {field.map((row, x) => (
+          <div className={styles.row} key={x}>
+            {row.map((value, y) => (
+              <button className={styles.button} key={y} type='button'>
                 {value}
               </button>
             ))}
