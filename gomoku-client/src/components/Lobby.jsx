@@ -44,7 +44,6 @@ function Lobby () {
             currentUser,
             user
           })
-          dispatch({ type: 'startGame' })
         },
         onReject () {
           handleDialogReject(user)
@@ -53,6 +52,9 @@ function Lobby () {
         user,
         view: 'choose'
       })
+    })
+    socket.on('server:startGame', () => {
+      dispatch({ type: 'startGame' })
     })
     inputRef.current.focus()
   }, [])
